@@ -71,7 +71,7 @@ public class ScheduleService {
         Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow( //schedule변수는 원래 저장되어있던 비밀번호가 담겨있는 변수!
                 () -> new IllegalArgumentException("존재하지 않는 일정입니다.")
         );
-        if(request.getPassword() != schedule.getPassword()){
+        if(!request.getPassword().equals(schedule.getPassword())){
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
         schedule.updateSchedule(request.getTitle(), request.getContent(), request.getPassword());
